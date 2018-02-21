@@ -1,6 +1,11 @@
 /* main.js */
 /* Script will dynamically populate html with elements containing images. */
 
+/* images {
+        image: link,
+        name: name,
+    }
+*/
 images = [];
 
 images.push("https://images.pexels.com/photos/209037/pexels-photo-209037.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
@@ -23,9 +28,48 @@ images.push("https://images.pexels.com/photos/248280/pexels-photo-248280.jpeg?w=
    html page
 */
 
+//var elementToCheckIfClickOutside = document.querySelector('#detailed-view');
 
-var selectImage = function() {
-    alert('you clicked');
+//document.body.addEventListener('click', function (event) {
+//    if (elementToCheckIfClickOutside.classList.contains('lightbox')) {
+//        console.log("detailed-veiw contains lightbox class");
+//        if (!elementToCheckIfClickOutside.contains(event.target)) {
+//            console.log("clicked outside");
+//            //closeLightBox();
+//        }
+//    }
+//});
+
+
+var closeLightBox = function(event) {
+    var lightbox = document.getElementById("detailed-view");
+    while (lightbox.firstChild) {
+        lightbox.removeChild(lightbox.firstChild);
+    }
+    lightbox.classList.toggle("lightbox");
+};
+
+
+var selectImage = function(event) {
+    // kill children if any exist
+    var lightbox = document.getElementById("detailed-view");
+    if (lightbox.childNodes.length > 0) {
+        while (lightbox.firstChild) {
+            lightbox.removeChild(lightbox.firstChild);
+        }
+    }
+    if (!lightbox.classList.contains('lightbox')) {
+        lightbox.classList.toggle("lightbox");
+    }
+    console.log(event);
+    console.log(event.path[0].currentSrc);
+    var img = document.createElement("img");
+    img.setAttribute("src", event.path[0].currentSrc);
+    img.setAttribute("height", "500");
+    img.setAttribute("width", "500");
+    lightbox.appendChild(img);
+    lightbox.onclick = closeLightBox;
+    
 };
 
 for (var i = 0; i < images.length; i++) {
@@ -35,7 +79,7 @@ for (var i = 0; i < images.length; i++) {
     img.setAttribute("height", "150");
     img.setAttribute("width", "150");
     img.setAttribute("alt", "Cat Picture");
-    //img.onclick = selectImage();
+    img.onclick = selectImage;
     div.appendChild(img);
     div.classList.add('image-item');
     document.getElementById("image-container").appendChild(div);
