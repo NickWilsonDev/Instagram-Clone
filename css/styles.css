@@ -25,5 +25,7 @@ body {
     width: 800px;
     height: 500px;
     outline: 5px solid black;
+    transition: 2s;
+    transform: scale(2);
 
 }
