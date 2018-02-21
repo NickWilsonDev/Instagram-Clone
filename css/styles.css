@@ -1,0 +1,19 @@
+/* styles.css */
+
+#image-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.image-item {
+    padding: 10px;
+}
+
+.image-item:hover {
+    cursor: pointer;
+    outline: 2px solid black; /*
+    border: 10px solid black; */
+}
+
+
