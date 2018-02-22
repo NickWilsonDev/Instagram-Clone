@@ -49,6 +49,9 @@ var closeLightBox = function(event) {
     lightbox.classList.toggle("lightbox");
 };
 
+var goLeft = function () {
+
+};
 
 var selectImage = function(event) {
     // kill children if any exist
@@ -61,15 +64,30 @@ var selectImage = function(event) {
     if (!lightbox.classList.contains('lightbox')) {
         lightbox.classList.toggle("lightbox");
     }
-    console.log(event);
-    console.log(event.path[0].currentSrc);
+    //console.log(event);
+    //console.log(event.path[0].currentSrc);
+    var navLeft = document.createElement("div");
+    navLeft.setAttribute("id", "navLeft");
+    var leftArrow = document.createElement("img");
+    leftArrow.setAttribute("src", "./leftArrow.png");
+    leftArrow.onclick = goLeft;
+    navLeft.appendChild(leftArrow);
+    lightbox.appendChild(navLeft);
+
     var img = document.createElement("img");
     img.setAttribute("src", event.path[0].currentSrc);
     img.setAttribute("height", "500");
     img.setAttribute("width", "500");
     lightbox.appendChild(img);
-    lightbox.onclick = closeLightBox;
+    //lightbox.onclick = closeLightBox;
     
+    var navRight = document.createElement("div");
+    navRight.setAttribute("id", "navRight");
+    var rightArrow = document.createElement("img");
+    rightArrow.setAttribute("src", "./rightArrow.png");
+    navRight.appendChild(rightArrow);
+    lightbox.appendChild(navRight);
+
 };
 
 for (var i = 0; i < images.length; i++) {

@@ -21,11 +21,19 @@ body {
 }
 
 .lightbox {
-    background: grey;
-    width: 800px;
-    height: 500px;
+    position:absolute;
+    margin: -25% 20% 10% 0%;
+    display: flex;
+    /*justify-content: space-around; */
+    background: rgba(255, 255, 255, 0.9);
+    width: calc(100% - 600px);
+   /* height: 100vh;*/
     outline: 5px solid black;
     transition: 2s;
-    transform: scale(2);
-
+    transform: scale(1.8) translateX(150px) translateY(-100px);
+}
+.lightbox img {
+    /*object-fit: contain; */
+    height: 100%;
+    width: 70%;
 }
