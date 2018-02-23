@@ -28,17 +28,7 @@ images.push("https://images.pexels.com/photos/248280/pexels-photo-248280.jpeg?w=
    html page
 */
 
-//var elementToCheckIfClickOutside = document.querySelector('#detailed-view');
 
-//document.body.addEventListener('click', function (event) {
-//    if (elementToCheckIfClickOutside.classList.contains('lightbox')) {
-//        console.log("detailed-veiw contains lightbox class");
-//        if (!elementToCheckIfClickOutside.contains(event.target)) {
-//            console.log("clicked outside");
-//            //closeLightBox();
-//        }
-//    }
-//});
 
 
 var closeLightBox = function(event) {
@@ -97,6 +87,7 @@ for (var i = 0; i < images.length; i++) {
     img.setAttribute("height", "150");
     img.setAttribute("width", "150");
     img.setAttribute("alt", "Cat Picture");
+    //img.setAttribute('data-image-index', i);
     img.onclick = selectImage;
     div.appendChild(img);
     div.classList.add('image-item');
