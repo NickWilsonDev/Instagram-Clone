@@ -99,6 +99,8 @@ var selectImage = function(event) {
     navLeft.setAttribute("id", "navLeft");
     var leftArrow = document.createElement("img");
     leftArrow.setAttribute("src", "./leftArrow.png");
+    //leftArrow.setAttribute("height", "50px");
+    //leftArrow.setAttribute("width", "50px");
     leftArrow.onclick = goLeft;
     navLeft.appendChild(leftArrow);
     lightbox.appendChild(navLeft);
@@ -115,6 +117,8 @@ var selectImage = function(event) {
     navRight.setAttribute("id", "navRight");
     var rightArrow = document.createElement("img");
     rightArrow.setAttribute("src", "./rightArrow.png");
+    //rightArrow.setAttribute("height", "50px");
+    //rightArrow.setAttribute("width", "50px");
     rightArrow.onclick = goRight;
     navRight.appendChild(rightArrow);
     lightbox.appendChild(navRight);
