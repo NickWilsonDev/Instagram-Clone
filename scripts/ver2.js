@@ -40,88 +40,81 @@ images = [ {
 
 
 var closeLightBox = function(event) {
-    var lightbox = document.getElementById("detailed-view");
-    while (lightbox.firstChild) {
-        lightbox.removeChild(lightbox.firstChild);
+    var $lightbox = $("#detailed-view");
+    while ($lightbox[0].firstChild) {
+        $lightbox[0].removeChild($lightbox[0].firstChild);
     }
-    lightbox.classList.toggle("lightbox");
+    $lightbox.toggleClass('lightbox');
 };
 
 var goLeft = function () {
-    var imageIndex = images.findIndex(item => item.src === document.getElementById("currentImage").src);
+    var imageIndex = images.findIndex(item => item.src === $('#currentImage')[0].src);
     var img = document.createElement("img");
     var index = 0;
-    console.log("imageIndex : " + imageIndex);
-    console.log(images.length + "images.length");
     if (imageIndex === 0) {
         index = images.length - 1;
     } else {
         index = imageIndex - 1;
     }
-    console.log("index::: " + index);
-    currentImage = document.getElementById("currentImage");
-    currentImage.setAttribute('src', images[index].src);
+    $currentImage = $('#currentImage');
+    $currentImage[0].setAttribute('src', images[index].src);
 };
 
 var goRight = function () {
-    var imageIndex = images.findIndex(item => item.src === document.getElementById("currentImage").src);
+    var imageIndex = images.findIndex(item => item.src === $('#currentImage')[0].src);
     var img = document.createElement("img");
     var index = 0;
-    console.log("imageIndex : " + imageIndex);
-    console.log(images.length + "images.length");
     if (imageIndex === images.length - 1) {
         index = 0;
     } else {
         index = imageIndex + 1;
     }
-    console.log("index::: " + index);
-    currentImage = document.getElementById("currentImage");
-    currentImage.setAttribute('src', images[index].src);
+    $currentImage = $('#currentImage');
+    $currentImage[0].setAttribute('src', images[index].src);
 };
-
-
 
 
 var selectImage = function(event) {
     // kill children if any exist
-    var lightbox = document.getElementById("detailed-view");
-    if (lightbox.childNodes.length > 0) {
-        while (lightbox.firstChild) {
-            lightbox.removeChild(lightbox.firstChild);
+    var $lightbox = $("#detailed-view");
+    if ($lightbox[0].childNodes.length > 0) {
+        while ($lightbox[0].firstChild) {
+            $lightbox[0].removeChild($lightbox[0].firstChild);
         }
     }
-    if (!lightbox.classList.contains('lightbox')) {
-        lightbox.classList.toggle("lightbox");
+    if (!$lightbox[0].classList.contains('lightbox')) {
+        $lightbox.toggleClass("lightbox");
     }
-    //console.log(event);
-    //console.log(event.path[0].currentSrc);
-    var navLeft = document.createElement("div");
-    navLeft.setAttribute("id", "navLeft");
-    var leftArrow = document.createElement("img");
-    leftArrow.setAttribute("src", "./leftArrow.png");
-    //leftArrow.setAttribute("height", "50px");
-    //leftArrow.setAttribute("width", "50px");
-    leftArrow.onclick = goLeft;
-    navLeft.appendChild(leftArrow);
-    lightbox.appendChild(navLeft);
+    //var navLeft = document.createElement("div");
+    //navLeft.setAttribute("id", "navLeft");
+    var $navLeft = $('<div>').attr({
+                    id: 'navLeft'}).appendTo($lightbox[0]);
+
+    //var leftArrow = document.createElement("img");
+    //leftArrow.setAttribute("src", "./leftArrow.png");
+    //leftArrow.addEventListener("click", goLeft);
+    //$navLeft[0].appendChild(leftArrow);
+    var $leftArrow = $('<img>').attr({
+                    src: './leftArrow.png'}).on('click', goLeft)
+                                            .appendTo($navLeft[0]);
+
+    //$lightbox[0].appendChild(navLeft);
 
     var img = document.createElement("img");
     img.setAttribute("src", event.path[0].currentSrc);
     img.setAttribute("id", "currentImage");
     img.setAttribute("height", "500");
     img.setAttribute("width", "500");
-    lightbox.appendChild(img);
-    img.onclick = closeLightBox;
+    $lightbox[0].appendChild(img);
+    img.addEventListener("click", closeLightBox);
     
     var navRight = document.createElement("div");
     navRight.setAttribute("id", "navRight");
     var rightArrow = document.createElement("img");
     rightArrow.setAttribute("src", "./rightArrow.png");
-    //rightArrow.setAttribute("height", "50px");
-    //rightArrow.setAttribute("width", "50px");
-    rightArrow.onclick = goRight;
+    rightArrow.addEventListener("click", goRight);
     navRight.appendChild(rightArrow);
-    lightbox.appendChild(navRight);
+    $lightbox[0].appendChild(navRight);
 
 };
 
@@ -133,10 +126,10 @@ images.forEach(function(image) {
     img.setAttribute("height", "150");
     img.setAttribute("width", "150");
     img.setAttribute("alt", "Cat Picture");
-    img.onclick = selectImage;
+    img.addEventListener("click", selectImage);
     div.appendChild(img);
     div.classList.add('image-item');
-    document.getElementById("image-container").appendChild(div);
+    $('#image-container')[0].appendChild(div);
 })
 
 
